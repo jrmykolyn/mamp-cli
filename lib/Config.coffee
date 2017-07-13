@@ -28,8 +28,11 @@ module.exports = class Config
     @writeConfig(config)
 
   readConfig: () ->
-    config = fs.readFileSync @configFile, 'utf8'
-    return JSON.parse config
+    try
+      config = fs.readFileSync @configFile, 'utf8'
+      return JSON.parse config
+    catch
+      return null
 
   writeConfig: (config) ->
     fs.writeFileSync @configFile, JSON.stringify(config)
